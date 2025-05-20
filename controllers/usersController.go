@@ -71,10 +71,16 @@ func Login(ctx *gin.Context) {
 		})
 		return
 	}
-	
+
 	ctx.SetSameSite(http.SameSiteLaxMode)
 	ctx.SetCookie("Authorization", tokenString, 3600*24, "", "", false, true)
 
 	ctx.JSON(200, gin.H{})
 
+}
+
+func Validate(ctx *gin.Context) {
+	user, _ := ctx.Get("user")
+
+	ctx.JSON(200, gin.H{"user": user})
 }
